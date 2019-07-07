@@ -1,0 +1,48 @@
+settings:
+  #Messages that players will recieve
+  notify: true
+  #Use shift + right click to set infinite anvil or shift + left click to remove infinite anvil
+  shift-click: true
+  #Max block radius for /anvil set [radius] and /anvil remove [radius]
+  max-radius: 25
+  #Players require infiniteanvil.remove to remove an infinite anvil
+  protect-infinite-anvils: true
+  #Players with infiniteanvil.updates will recieve messages if plugin is not up to date
+  CheckUpdate: true
+  #If set to true, you will always recieve messages in console, that will inform you about version of the plugin
+  ConsoleCheckUpdate: true
+
+messages:
+  anvil-set: '&7[InfiniteAnvil] &aInfinite anvil set at X:%x% Y:%y% Z:%z%!'
+  anvil-remove: '&7[InfiniteAnvil] Infinite anvil removed at X:%x% Y:%y% Z:%z%z!'
+  already-set: '&7[InfiniteAnvil] &cAnvil is already infinite.'
+  already-removed: '&7[InfiniteAnvil] &cAnvil is already not infinite.'
+
+  radius-set: '&7[InfiniteAnvil] &aTotal of %amount% anvils made infinite in a radius of %radius%!'
+  radius-remove: '&7[InfiniteAnvil] Total of %amount% anvils made normal in a radius of %radius%!'
+  none-radius-set: '&7[InfiniteAnvil] &cEither all anvils nearby are infinite or no anvils found.'
+  none-radius-remove: '&7[InfiniteAnvil] &cEither all anvils nearby are normal or no anvils found.'
+
+  data-purge: '&7[InfiniteAnvil] &aPurged %amount% infinite anvils!'
+  already-empty: '&7[InfiniteAnvil] &cDatabase already empty.'
+
+  toggle-on: '&7[InfiniteAnvil] &aInfinite anvil place toggled on.'
+  toggle-off: '&7[InfiniteAnvil] Infinite anvil place toggled off.'
+  already-toggled-on: '&7[InfiniteAnvil] &cInfinite anvil place already toggled on.'
+  already-toggled-off: '&7[InfiniteAnvil] &cInfinite anvil place already toggled off.'
+
+  reload: '&7[InfiniteAnvil] &aInfiniteAnvil config has been reloaded!'
+
+  number-zero: '&7[InfiniteAnvil] &cNumber must be greater zero.'
+  number-negative: '&7[InfiniteAnvil] &cNumber must be positive.'
+  number-above-max: '&7[InfiniteAnvil] &cRadius cannot surpass %radius%.'
+
+  invalid-block: '&7[InfiniteAnvil] &cMust be looking at an anvil.'
+  invalid-number: '&7[InfiniteAnvil] &c%number% is not a whole number.'
+  invalid-syntax: '&7[InfiniteAnvil] &6Invalid Syntax: &e%command%'
+
+  no-perm-break: '&7[InfiniteAnvil] &cYou do not have permission to break an Infinite Anvil'
+  no-perm-remove: '&7[InfiniteAnvil] &cYou do not have permission to remove an Infinite Anvil.'
+  no-perm-set: '&7[InfiniteAnvil] &cYou do not have permission to set an Infinite Anvil.'
+  no-perm-use: '&7[InfiniteAnvil] &cYou do not have permission to use an Infinite Anvil.'
+  no-perm-cmd: '&7[InfiniteAnvil] &cYou do not have permission to perform this command.'
