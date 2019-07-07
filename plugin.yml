@@ -1,0 +1,11 @@
+name: InfiniteAnvil
+version: 1.0
+description: Make your anvil unbreakable
+author: nato3623
+main: com.vaincecraft.infiniteanvil.main.Main
+
+commands:
+  anvil:
+    aliases: [anvils, infiniteanvil, ianvil, ia]
+    description: Main command
+    usage: /anvil
