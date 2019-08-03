@@ -15,17 +15,19 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 
 import com.vaincecraft.infiniteanvil.commands.CommandHandler;
-import com.vaincecraft.infiniteanvil.configurations.Configuration;
 import com.vaincecraft.infiniteanvil.main.Main;
 import com.vaincecraft.infiniteanvil.utils.GenerateUUID;
 
 public class PlaceAnvil implements Listener {
-	private Configuration configuration = Main.getInstance().getConfiguration();
 	private GenerateUUID uuid = Main.getInstance().getGenerateUUID();
 
 	@EventHandler
 	public void placeAnvil(BlockPlaceEvent e) {
 		if (!e.isCancelled()) {
+			String prefixs = Main.getInstance().getConfig().getString("settings.Prefix");
+			String prefix = prefixs.replaceAll("&", "§");
+			String anvilsets = Main.getLangFile().getString("messages.anvil-set");
+			String anvilset = anvilsets.replaceAll("&", "§"); //colormsg1
 			Player p = e.getPlayer();
 			if (e.getBlock().getType() == Material.ANVIL) {
 				Main.getInstance().getCommandHandler();
@@ -40,8 +42,9 @@ public class PlaceAnvil implements Listener {
         
 					Main.getInstance().getData().getLoadData().set(uuid.generateUUID().toString(), e.getBlockPlaced().getWorld().getName() + ", " + x + ", " + y + ", " + z + ", " + data);
 					Main.getInstance().getData().saveData();
-					if (configuration.notifyMessages()) {
-						configuration.anvilSetMessage(p, x, y, z);
+					if (Main.getInstance().getConfig().getBoolean("settings.notify")) {
+	    				String colormsg1 = anvilset.replace("%x%", Integer.toString(x)).replace("%y%", Integer.toString(y)).replace("%z%", Integer.toString(z));
+	    				p.getPlayer().sendMessage(prefix + colormsg1);
 					}
 				}
 			}
