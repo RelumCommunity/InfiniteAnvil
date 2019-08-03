@@ -15,20 +15,15 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import net.md_5.bungee.api.ChatColor;
 
 public class VersionChecker implements Listener{
-	
-	public String pluginVersion = "1.0";
-	
-	public VersionChecker()
-	  {
-		if (Main.getInstance().getConfig().getBoolean("settings.ConsoleCheckUpdate")){
-			try
-			{
+	public String pluginVersion = Main.getInstance().getDescription().getVersion();
+	public VersionChecker() {
+		if (Main.getInstance().getConfig().getBoolean("settings.ConsoleCheckUpdate")) {
+			try {
 				HttpURLConnection connection = (HttpURLConnection)new URL("https://api.spigotmc.org/legacy/update.php?resource=69094").openConnection();
 				connection.setDoOutput(true);
 				connection.setRequestMethod("POST");
 				String version = new BufferedReader(new InputStreamReader(connection.getInputStream())).readLine();
-				if (!pluginVersion.equals(version))
-				{
+				if (!pluginVersion.equals(version)) {
 					Main.getInstance().getLogger().log(Level.WARNING, " ");
 					Main.getInstance().getLogger().log(Level.WARNING, "         -= InfiniteAnvil =-");
 					Main.getInstance().getLogger().log(Level.WARNING, "You do not have the latest version!");
@@ -37,16 +32,14 @@ public class VersionChecker implements Listener{
 					Main.getInstance().getLogger().log(Level.WARNING, "Latest: " + version);
 					Main.getInstance().getLogger().log(Level.WARNING, " ");
 				}
-				else
-				{
+				else {
 					Main.getInstance().getLogger().log(Level.INFO, " ");
 					Main.getInstance().getLogger().log(Level.INFO, "         -= InfiniteAnvil =-");
 					Main.getInstance().getLogger().log(Level.INFO, "You are running the latest version!");
 					Main.getInstance().getLogger().log(Level.INFO, " ");
 				}
 			}
-			catch (IOException e)
-			{
+			catch (IOException e) {
 				Main.getInstance().getLogger().log(Level.SEVERE, " ");
 				Main.getInstance().getLogger().log(Level.SEVERE, "         -= InfiniteAnvil =-");
 				Main.getInstance().getLogger().log(Level.SEVERE, "Could not make connection to SpigotMC.org!");
@@ -55,13 +48,11 @@ public class VersionChecker implements Listener{
 			}
 		}
 	}
-	
 	@EventHandler
 	public void onJoin(PlayerJoinEvent j) {
 		Player p = j.getPlayer();
 		if(p.hasPermission("infiniteanvil.updates") && Main.getInstance().getConfig().getBoolean("settings.CheckUpdate")) {
-			try
-		    {
+			try {
 		      HttpURLConnection connection = (HttpURLConnection)new URL("https://api.spigotmc.org/legacy/update.php?resource=69094").openConnection();
 		      connection.setDoOutput(true);
 		      connection.setRequestMethod("POST");
@@ -70,11 +61,9 @@ public class VersionChecker implements Listener{
 		    	  p.sendMessage(ChatColor.GRAY + "[InfiniteAnvil] " + ChatColor.RED + "You are not in the latest version, please update the plugin from our spigot page: https://www.spigotmc.org/resources/infinite-anvil-1-7-10-1-14-3.69094/");
 		      }
 		    }
-		    catch (IOException e)
-		    {
+		    catch (IOException e) {
 		    	e.printStackTrace();
 			}
 		}
 	}
-
 }
