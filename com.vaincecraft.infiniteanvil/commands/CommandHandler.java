@@ -7,11 +7,12 @@
  */
 package com.vaincecraft.infiniteanvil.commands;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -21,7 +22,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import com.vaincecraft.infiniteanvil.configurations.Configuration;
 import com.vaincecraft.infiniteanvil.main.Main;
 import com.vaincecraft.infiniteanvil.utils.Data;
 import com.vaincecraft.infiniteanvil.utils.GenerateUUID;
@@ -29,13 +29,59 @@ import com.vaincecraft.infiniteanvil.utils.GenerateUUID;
 public class CommandHandler implements CommandExecutor{
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private static Set<UUID> togglePlayer = new HashSet();
-	private Configuration configuration = Main.getInstance().getConfiguration();
 	private Data data = Main.getInstance().getData();
 	private GenerateUUID uuid = Main.getInstance().getGenerateUUID();
 	private int radius;
 	private int total;
 	  
 	public boolean onCommand(final CommandSender sender, Command cmd, String label, String[] args) {
+		int maxradius = Main.getInstance().getConfig().getInt("settings.max-radius");
+		String prefixs = Main.getInstance().getConfig().getString("settings.Prefix");
+		String prefix = prefixs.replaceAll("&", "§");
+		String alreadyset = Main.getLangFile().getString("messages.already-set");
+		String colormsg1 = alreadyset.replaceAll("&", "§");
+		String alreadyremoved = Main.getLangFile().getString("messages.already-removed");
+		String colormsg2 = alreadyremoved.replaceAll("&", "§");
+		String noneradiusset = Main.getLangFile().getString("messages.none-radius-set");
+		String colormsg3= noneradiusset.replaceAll("&", "§");
+		String noneradiusremove = Main.getLangFile().getString("messages.none-radius-remove");
+		String colormsg4 = noneradiusremove.replaceAll("&", "§");
+		String alreadyempty = Main.getLangFile().getString("messages.already-empty");
+		String colormsg5 = alreadyempty.replaceAll("&", "§");
+		String toggleon = Main.getLangFile().getString("messages.toggle-on");
+		String colormsg6 = toggleon.replaceAll("&", "§");
+		String toggleoff = Main.getLangFile().getString("messages.toggle-off");
+		String colormsg7 = toggleoff.replaceAll("&", "§");
+		String alreadytoggledon = Main.getLangFile().getString("messages.already-toggled-on");
+		String colormsg8 = alreadytoggledon.replaceAll("&", "§");
+		String alreadytoggledoff = Main.getLangFile().getString("messages.already-toggled-off");
+		String colormsg9 = alreadytoggledoff.replaceAll("&", "§");
+		String reload = Main.getLangFile().getString("messages.reload");
+		String colormsg10 = reload.replaceAll("&", "§");
+		String numberzero = Main.getLangFile().getString("messages.number-zero");
+		String colormsg11 = numberzero.replaceAll("&", "§");
+		String numbernegative = Main.getLangFile().getString("messages.number-negative");
+		String colormsg12 = numbernegative.replaceAll("&", "§");
+		String invalidblock = Main.getLangFile().getString("messages.invalid-block");
+		String colormsg13 = invalidblock.replaceAll("&", "§");
+		String nopermcmd = Main.getLangFile().getString("messages.no-perm-cmd");
+		String colormsg14 = nopermcmd.replaceAll("&", "§");
+		String invalidsyntaxs= Main.getLangFile().getString("messages.invalid-syntax");
+		String invalidsyntax = invalidsyntaxs.replaceAll("&", "§"); //colormsg15
+		String numberabovemax = Main.getLangFile().getString("messages.number-above-max");
+		String colormsg16 = numberabovemax.replace("%radius%", Integer.toString(maxradius));
+		String anvilsets = Main.getLangFile().getString("messages.anvil-set");
+		String anvilset = anvilsets.replaceAll("&", "§"); //colormsg17
+		String anvilremoves = Main.getLangFile().getString("messages.anvil-remove");
+		String anvilremove = anvilremoves.replaceAll("&", "§"); //colormsg18
+		String radiussets = Main.getLangFile().getString("messages.radius-set");
+		String radiusset = radiussets.replaceAll("&", "§"); //colormsg19
+		String radiusremoves = Main.getLangFile().getString("messages.radius-remove");
+		String radiusremove = radiusremoves.replaceAll("&", "§"); //colormsg20
+		String datapurges = Main.getLangFile().getString("messages.data-purge");
+		String datapurge = datapurges.replaceAll("&", "§"); //colormsg21
+		String invalidnumbers = Main.getLangFile().getString("messages.invalid-number");
+		String invalidnumber = invalidnumbers.replaceAll("&", "§"); //colormsg22
 		Player p = (Player)sender;
 	    int length = args.length;
 	    if (length > 0) {
@@ -46,19 +92,20 @@ public class CommandHandler implements CommandExecutor{
 	    					radius = Integer.parseInt(args[1]);
 	    				}
 	    				catch (NumberFormatException e) {
-	    					configuration.invalidNumberMessage(sender, args[1]);
+							String colormsg22 = invalidnumber.replace("%number%", args[1]);
+							p.getPlayer().sendMessage(prefix + colormsg22);
 	    					return true;
 	    				}
 	    				if (radius == 0) {
-	    					configuration.numberZeroMessage(sender);
+	    					p.getPlayer().sendMessage(prefix + colormsg11);
 	    					return true;
 	    				}
 	    				if (radius < 0) {
-	    					configuration.numberNegativeMessage(sender);
+	    					p.getPlayer().sendMessage(prefix + colormsg12);
 	    					return true;
 	    				}
-	    				if (radius > configuration.maxRadius()) {
-	    					configuration.numberAboveMaxMessage(sender);
+	    				if (radius > Main.getInstance().getConfig().getInt("settings.max-radius")) {
+	    					p.getPlayer().sendMessage(prefix + colormsg16);;
 	    					return true;
 	    				}
 	    				total = 0;
@@ -66,29 +113,30 @@ public class CommandHandler implements CommandExecutor{
 	    				new BukkitRunnable() {
 	    					@SuppressWarnings("deprecation")
 							public void run() {
-	    						for (int x = -CommandHandler.this.radius; x <= CommandHandler.this.radius; x++) {
-	    							for (int y = -CommandHandler.this.radius; y <= CommandHandler.this.radius; y++) {
-	    								for (int z = -CommandHandler.this.radius; z <= CommandHandler.this.radius; z++) {
+	    						for (int x = -radius; x <= radius; x++) {
+	    							for (int y = -radius; y <= radius; y++) {
+	    								for (int z = -radius; z <= radius; z++) {
 	    									if (b.getRelative(x, y, z).getType() == Material.ANVIL) {
 	    										Block foundAnvil = b.getRelative(x, y, z);
-	    										if (!CommandHandler.this.data.checkData(foundAnvil)) {
+	    										if (!data.checkData(foundAnvil)) {
 	    											Location l = foundAnvil.getLocation();
 	    											int anvilX = l.getBlockX();
 	    											int anvilY = l.getBlockY();
 	    											int anvilZ = l.getBlockZ();
 	                          
-	    											CommandHandler.this.data.getLoadData().set(CommandHandler.this.uuid.generateUUID().toString(), foundAnvil.getWorld().getName() + ", " + anvilX + ", " + anvilY + ", " + anvilZ + ", " + foundAnvil.getData());
+	    											data.getLoadData().set(uuid.generateUUID().toString(), foundAnvil.getWorld().getName() + ", " + anvilX + ", " + anvilY + ", " + anvilZ + ", " + foundAnvil.getData());
 	    										}
 	    									}
 	    								}
 	    							}
 	    						}
-	    						if (CommandHandler.this.total == 0) {
-	    							CommandHandler.this.configuration.noneRadiusSetMessage(sender);
+	    						if (total == 0) {
+	    							p.getPlayer().sendMessage(prefix + colormsg3);
 	    						}
 	    						else {
-	    							CommandHandler.this.data.saveData();
-	    							CommandHandler.this.configuration.radiusSetMessage(sender, CommandHandler.this.total, CommandHandler.this.radius);
+	    							data.saveData();
+	    							String colormsg19 = radiusset.replace("%amount%", Integer.toString(total)).replace("%radius%", Integer.toString(maxradius));
+	    							p.getPlayer().sendMessage(prefix + colormsg19);;
 	    						}
 	    					}
 	    				}.runTaskAsynchronously(Main.getInstance());
@@ -105,19 +153,20 @@ public class CommandHandler implements CommandExecutor{
 	    				@SuppressWarnings("deprecation")
 						Byte blockData = Byte.valueOf(b.getData());
 	    				if (data.checkData(b)) {
-	    					configuration.alreadySetMessage(p);
+	    					p.getPlayer().sendMessage(prefix + colormsg1);
 	    					return true;
 	    				}
 	    				data.getLoadData().set(uuid.generateUUID().toString(), b.getWorld().getName() + ", " + x + ", " + y + ", " + z + ", " + blockData);
 	    				data.saveData();
 	            
-	    				configuration.anvilSetMessage(p, x, y, z);
+	    				String colormsg17 = anvilset.replace("%x%", Integer.toString(x)).replace("%y%", Integer.toString(y)).replace("%z%", Integer.toString(z));
+	    				p.getPlayer().sendMessage(prefix + colormsg17);
 	    				return true;
 	    			}
-	    			configuration.invalidBlockMessage(sender);
+	    			p.getPlayer().sendMessage(prefix + colormsg13);
 	    			return true;
 	    		}
-	    		configuration.noPermCmdMessage(sender);
+	    		p.getPlayer().sendMessage(prefix + colormsg14);
 	    		return true;
 	    	}
 	    	if ((args[0].equalsIgnoreCase("remove")) || (args[0].equalsIgnoreCase("unset"))) {
@@ -127,43 +176,45 @@ public class CommandHandler implements CommandExecutor{
 	    					radius = Integer.parseInt(args[1]);
 	    				}
 	    				catch (NumberFormatException e) {
-	    					configuration.invalidNumberMessage(sender, args[1]);
+	    					String colormsg22 = invalidnumber.replace("%number%", args[1]);
+							p.getPlayer().sendMessage(prefix + colormsg22);
 	    					return true;
 	    				}
 	    				if (radius == 0) {
-	    					configuration.numberZeroMessage(sender);
+	    					p.getPlayer().sendMessage(prefix + colormsg11);
 	    					return true;
 	    				}
 	    				if (radius < 0) {
-	    					configuration.numberNegativeMessage(sender);
+	    					p.getPlayer().sendMessage(prefix + colormsg12);
 	    					return true;
 	    				}
-	    				if (radius > configuration.maxRadius()) {
-	    					configuration.numberAboveMaxMessage(sender);
+	    				if (radius > Main.getInstance().getConfig().getInt("settings.max-radius")) {
+	    					p.getPlayer().sendMessage(prefix + colormsg16);;
 	    					return true;
 	    				}
 	    				total = 0;
 	    				final Block b = p.getLocation().getBlock();
 	    				new BukkitRunnable() {
 	    					public void run() {
-	    						for (int x = -CommandHandler.this.radius; x <= CommandHandler.this.radius; x++) {
-	    							for (int y = -CommandHandler.this.radius; y <= CommandHandler.this.radius; y++) {
-	    								for (int z = -CommandHandler.this.radius; z <= CommandHandler.this.radius; z++) {
+	    						for (int x = -radius; x <= radius; x++) {
+	    							for (int y = -radius; y <= radius; y++) {
+	    								for (int z = -radius; z <= radius; z++) {
 	    									if (b.getRelative(x, y, z).getType() == Material.ANVIL) {
 	    										Block foundAnvil = b.getRelative(x, y, z);
-	    										if (CommandHandler.this.data.checkData(foundAnvil)) {
-	    											CommandHandler.this.data.getLoadData().set(CommandHandler.this.data.getUUID(), null);
+	    										if (data.checkData(foundAnvil)) {
+	    											data.getLoadData().set(data.getUUID(), null);
 	    										}
 	    									}
 	    								}
 	    							}
 	    						}
-	    						if (CommandHandler.this.total == 0) {
-	    							CommandHandler.this.configuration.noneRadiusRemoveMessage(sender);
+	    						if (total == 0) {
+	    							p.getPlayer().sendMessage(prefix + colormsg4);
 	    						}
 	    						else {
-	    							CommandHandler.this.data.saveData();
-	    							CommandHandler.this.configuration.radiusRemoveMessage(sender, CommandHandler.this.total, CommandHandler.this.radius);
+	    							data.saveData();
+	    							String colormsg20 = radiusremove.replace("%amount%", Integer.toString(total)).replace("%radius%", Integer.toString(maxradius));
+	    							p.getPlayer().sendMessage(prefix + colormsg20);
 	    						}
 	    					}
 	    				}.runTaskAsynchronously(Main.getInstance());
@@ -181,16 +232,17 @@ public class CommandHandler implements CommandExecutor{
 	    					data.getLoadData().set(data.getUUID(), null);
 	    					data.saveData();
 	              
-	    					configuration.anvilRemoveMessage(p, x, y, z);
+		    				String colormsg18 = anvilremove.replace("%x%", Integer.toString(x)).replace("%y%", Integer.toString(y)).replace("%z%", Integer.toString(z));
+		    				p.getPlayer().sendMessage(prefix + colormsg18);
 	    					return true;
 	    				}
-	    				configuration.alreadyRemovedMessage(p);
+	    				p.getPlayer().sendMessage(prefix + colormsg2);
 	    				return true;
 	    			}
-	    			configuration.invalidBlockMessage(sender);
+	    			p.getPlayer().sendMessage(prefix + colormsg13);
 	    			return true;
 	    		}
-	    		configuration.noPermCmdMessage(sender);
+	    		p.getPlayer().sendMessage(prefix + colormsg14);
 	    		return true;
 	    	}
 	    	if (args[0].equalsIgnoreCase("toggle")) {
@@ -198,45 +250,47 @@ public class CommandHandler implements CommandExecutor{
 	    			if (length > 1) {
 	    				if (args[1].equalsIgnoreCase("off")) {
 	    					if (!togglePlayer.contains(p.getUniqueId())) {
-	    						configuration.alreadyToggledOffMessage(sender);
+	    						p.getPlayer().sendMessage(prefix + colormsg9);
 	    						return true;
 	    					}
-	    					configuration.toggleOffMessage(sender);
+	    					p.getPlayer().sendMessage(prefix + colormsg7);
 	    					togglePlayer.remove(p.getUniqueId());
 	    					return true;
 	    				}
 	    				if (args[1].equalsIgnoreCase("on")) {
 	    					if (togglePlayer.contains(p.getUniqueId())) {
-	    						configuration.alreadyToggledOnMessage(sender);
+	    						p.getPlayer().sendMessage(prefix + colormsg8);
 	    						return true;
 	    					}
-	    					configuration.toggleOnMessage(sender);
+	    					p.getPlayer().sendMessage(prefix + colormsg6);
 	    					togglePlayer.add(p.getUniqueId());
 	    					return true;
 	    				}
-	    				configuration.invalidSyntaxMessage(sender, "/" + label + " toggle [on/off]");
+	    				String colormsg15 = invalidsyntax.replace("%label%", label);
+	    				p.getPlayer().sendMessage(prefix + colormsg15);
 	    				return true;
 	    			}
 	    			if (togglePlayer.contains(p.getUniqueId())) {
-	    				configuration.toggleOffMessage(sender);
+	    				p.getPlayer().sendMessage(prefix + colormsg7);
 	    				togglePlayer.remove(p.getUniqueId());
 	    				return true;
 	    			}
-	    			configuration.toggleOnMessage(sender);
+	    			p.getPlayer().sendMessage(prefix + colormsg6);
 	    			togglePlayer.add(p.getUniqueId());
 	    			return true;
 	    		}
-	    		configuration.noPermCmdMessage(sender);
+	    		p.getPlayer().sendMessage(prefix + colormsg14);
 	    		return true;
 	    	}
 	    	if ((args[0].equalsIgnoreCase("purge")) && (sender.hasPermission("infiniteanvil.purge"))) {
 	    		new BukkitRunnable() {
 	    			public void run() {
-	    				CommandHandler.this.data.clearData();
-	    				if (CommandHandler.this.data.getAnvils() == 0) {
-	    					CommandHandler.this.configuration.alreadyEmptyMessage(sender);
+	    				data.clearData();
+	    				if (data.getAnvils() == 0) {
+	    					p.getPlayer().sendMessage(prefix + colormsg5);
 	    				} else {
-	    					CommandHandler.this.configuration.dataPurgeMessage(sender, CommandHandler.this.data.getAnvils());
+							String colormsg21 = datapurge.replace("%amount%", Integer.toString(data.getAnvils()));
+							p.getPlayer().sendMessage(prefix + colormsg21);
 	    				}
 	    			}
 	    		}.runTaskAsynchronously(Main.getInstance());
@@ -245,18 +299,11 @@ public class CommandHandler implements CommandExecutor{
 	    	if (args[0].equalsIgnoreCase("reload")) {
 	    		if (sender.hasPermission("infiniteanvil.reload")) {
 	    		  	Main.getInstance().reloadConfig();
-	    		  	configuration.reloadMessage(sender);
+	    		  	p.getPlayer().sendMessage(prefix + colormsg10);
 	    		  	return true;
 	    	  	}
-	    	  	configuration.noPermCmdMessage(sender);
+	    	  	p.getPlayer().sendMessage(prefix + colormsg14);
 	    	  	return true;
-	      	}
-	      	if (args[0].equalsIgnoreCase("version")) {
-	      		sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&aRunning Infinite Anvil v" + Main.getInstance().getDescription().getVersion() + " by derive!"));
-	        
-	      		String version = Main.getInstance().getServer().getBukkitVersion().substring(0, 6).replace("-", "");
-	      		sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7Server Version: " + version));
-	      		return true;
 	      	}
 	      	if (args[0].equalsIgnoreCase("help")) {
 	      		help(label, sender);
@@ -268,23 +315,20 @@ public class CommandHandler implements CommandExecutor{
 	    return true;
 	 }
 	 private void help(String label, CommandSender sender) {
-	    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&e ------ &6Infinite Anvil Help &e------"));
-	    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a/" + label + " help &7- Displays this page"));
-	    if (sender.hasPermission("infiniteanvil.set")) {
-	    	sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a/" + label + " set [radius] &7- Set anvil(s) to be infinite"));
-	    }
-	    if (sender.hasPermission("infiniteanvil.remove")) {
-	    	sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a/" + label + " remove [radius] &7- Remove anvil(s) from infinite"));
-	    }
-	    if (sender.hasPermission("infiniteanvil.toggle")) {
-	    	sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a/" + label + " toggle [on/off] &7- Toggle infinite anvil on place on/off"));
-	    }
-	    if (sender.hasPermission("infiniteanvil.purge")) {
-	    	sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a/" + label + " purge &7- Clear all infinite anvils from the database"));
-	    }
-	    if (sender.hasPermission("infiniteanvil.reload")) {
-	    	sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a/" + label + " reload &7- Reloads the configuration"));
-	    }
+		 String pluginVersion = Main.getInstance().getDescription().getVersion();
+		 List<?> help = new ArrayList<String>();
+		 help.clear();
+   	  	 help = Main.getLangFile().getList("messages.Help");
+   	  	 int size = help.size();
+   	  	 int i = 0;
+   	  	 while(i < size) { 
+   	  		 String helps = ""+help.get(i);
+   	  		 String help1 = helps.replaceAll("&", "§");
+   	  		 String pluginVersions = help1.replace("%label%", label);
+   	  		 String colormsg23 = pluginVersions.replace("%ver%", pluginVersion);
+   	  		 sender.sendMessage(colormsg23);
+   	  		 i++;
+   	  	 }
 	}
 	  
 	public static Set<UUID> getTogglePlayer() {
