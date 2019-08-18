@@ -1,0 +1,44 @@
+messages:
+  Help:
+  - '&e ------ &6Ayuda Infinite Anvil &e------'
+  - '&a /%label% help &7- Muestra esta página'
+  - '&a /%label% set [radio] &7- Establecer yunque(s) para ser infinito'
+  - '&a /%label% remove [radio] &7- Eliminar yunque(s) infinito'
+  - '&a /%label% toggle [on/off] &7- Activar/desactivar yunque infinito'
+  - '&a /%label% purge &7- Borrar todos los yunques infinitos de la base de datos'
+  - '&a /%label% reload &7- Recarga la configuracion'
+  - '&a Versión &7- %ver%'
+  
+  anvil-set: '&aYunque infinito fijado en X:%x% Y:%y% Z:%z%!'
+  anvil-remove: '&cYunque infinito removido en X:%x% Y:%y% Z:%z%z!'
+  already-set: '&cEl yunque ya es infinito.'
+  already-removed: '&cEl yunque no es infinito.'
+
+  radius-set: '&aUn total de %amount% yunques hechos infinitos en un radio de %radius%!'
+  radius-remove: '&cUn total de %amount% yunques normalizados en un radio de %radius%!'
+  none-radius-set: '&cTodos los yunques cercanos ya son infinitos o no se encuentran yunques.'
+  none-radius-remove: '&cTodos los yunques cercanos son normales o no se encuentran yunques.'
+
+  data-purge: '&aPurgado %amount% yunques infinitos!'
+  already-empty: '&cLa base de datos ya está vacía.'
+
+  toggle-on: '&aLugar de yunque infinito activado.'
+  toggle-off: '&cLugar de yunque infinito desactivado.'
+  already-toggled-on: '&cInfinito lugar de yunque ya activado.'
+  already-toggled-off: '&cEl lugar del yunque infinito ya está desactivado.'
+
+  reload: '&aInfiniteAnvil config ha sido recargado!'
+
+  number-zero: '&cEl número debe ser mayor a cero.'
+  number-negative: '&cEl número debe ser positivo.'
+  number-above-max: '&cEl radio no puede superar %radius%.'
+
+  invalid-block: '&cDebe estar mirando a un yunque.'
+  invalid-number: '&c%number% no es un número entero.'
+  invalid-syntax: '&6Sintaxis inválida: &e/%label% toggle [on/off]'
+
+  no-perm-break: '&cNo tienes permiso para romper un Yunque Infinito'
+  no-perm-remove: '&cNo tienes permiso para eliminar un Yunque Infinito.'
+  no-perm-set: '&cNo tienes permiso para establecer un Yunque Infinito.'
+  no-perm-use: '&cNo tienes permiso para usar un Yunque Infinito.'
+  no-perm-cmd: '&cNo tienes permiso para ejecutar este comando.'
