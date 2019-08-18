@@ -1,0 +1,44 @@
+messages:
+  Help:
+  - '&e ------ &6Infinite Anvil Help &e------'
+  - '&a /%label% help &7- Visualizza questa pagina'
+  - '&a /%label% set [radius] &7- Impostare incudine(i) come infinita'
+  - '&a /%label% remove [radius] &7- Rimuovere incudine(i) come infinita'
+  - '&a /%label% toggle [on/off] &7- Imposta incudine infinita sul posto on/off'
+  - '&a /%label% purge &7- Rimuovi tutti gli anvil infiniti dal database'
+  - '&a /%label% reload &7- Ricarica i config'
+  - '&a Versione &7- %ver%'
+  
+  anvil-set: '&aIncudine infinito impostato a X:%x% Y:%y% Z:%z%!'
+  anvil-remove: '&cIncudine infinito rimosso a X:%x% Y:%y% Z:%z%z!'
+  already-set: '&cIncudine già infinito.'
+  already-removed: '&cIncudine non infinito.'
+
+  radius-set: '&aUn totale di %amount% incudini, sono state rese infinite in un raggio di %radius%!'
+  radius-remove: '&cUn totale di %amount% incudini, sono state rese normali in un raggio di %radius%!'
+  none-radius-set: '&cO tutte le incudini nelle vicinanze sono infinite o non sono state trovate incudini.'
+  none-radius-remove: '&cO tutte le incudini nelle vicinanze sono normali o non sono state rilevate incudini.'
+
+  data-purge: '&aRimosso(i) %amount% incudine infinito!'
+  already-empty: '&cDatabase già vuoto.'
+
+  toggle-on: '&aIncudine infinito attivato.'
+  toggle-off: '&cIncudine infinito disattivato.'
+  already-toggled-on: '&cIncudine infinito già attivo qui.'
+  already-toggled-off: '&cIncudine infinito ancora non attivo qui.'
+
+  reload: '&aConfig ricaricato!'
+
+  number-zero: '&cIl numero deve essere più grande di zero.'
+  number-negative: '&cIl numero deve essere positivo.'
+  number-above-max: '&cIl raggio non può superare %radius%.'
+
+  invalid-block: '&cDevi guardare un incudine.'
+  invalid-number: '&c%number% non è un numero intero.'
+  invalid-syntax: '&6Sintassi non valida: &e/%label% toggle [on/off]'
+
+  no-perm-break: '&cNon hai il permesso per rompere un Incudine Invinito'
+  no-perm-remove: '&cNon hai il permesso per rimuovere un Incudine Invinito.'
+  no-perm-set: '&cNon hai il permesso per impostare un Incudine Invinito.'
+  no-perm-use: '&cNon hai il permesso per usare un Incudine Invinito.'
+  no-perm-cmd: '&cNon hai il permesso per eseguire questo comando.'
