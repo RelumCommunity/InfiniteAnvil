@@ -1,0 +1,44 @@
+messages:
+  Help:
+  - '&e ------ &6Infinite Anvil Help &e------'
+  - '&a /%label% help &7- Displays this page'
+  - '&a /%label% set [radius] &7- Set anvil(s) to be infinite'
+  - '&a /%label% remove [radius] &7- Remove anvil(s) from infinite'
+  - '&a /%label% toggle [on/off] &7- Toggle infinite anvil on place on/off'
+  - '&a /%label% purge &7- Clear all infinite anvils from the database'
+  - '&a /%label% reload &7- Reloads the configuration'
+  - '&a Version &7- %ver%'
+  
+  anvil-set: '&aInfinite anvil set at X:%x% Y:%y% Z:%z%!'
+  anvil-remove: '&cInfinite anvil removed at X:%x% Y:%y% Z:%z%z!'
+  already-set: '&cAnvil is already infinite.'
+  already-removed: '&cAnvil is not infinite.'
+
+  radius-set: '&aTotal of %amount% anvils made infinite in a radius of %radius%!'
+  radius-remove: '&cTotal of %amount% anvils made normal in a radius of %radius%!'
+  none-radius-set: '&cEither all anvils nearby are infinite or no anvils found.'
+  none-radius-remove: '&cEither all anvils nearby are normal or no anvils found.'
+
+  data-purge: '&aPurged %amount% infinite anvils!'
+  already-empty: '&cDatabase already empty.'
+
+  toggle-on: '&aInfinite anvil place toggled on.'
+  toggle-off: '&cInfinite anvil place toggled off.'
+  already-toggled-on: '&cInfinite anvil place already toggled on.'
+  already-toggled-off: '&cInfinite anvil place already toggled off.'
+
+  reload: '&aInfiniteAnvil config has been reloaded!'
+
+  number-zero: '&cNumber must be greater zero.'
+  number-negative: '&cNumber must be positive.'
+  number-above-max: '&cRadius cannot surpass %radius%.'
+
+  invalid-block: '&cMust be looking at an anvil.'
+  invalid-number: '&c%number% is not a whole number.'
+  invalid-syntax: '&6Invalid Syntax: &e/%label% toggle [on/off]'
+
+  no-perm-break: '&cYou do not have permission to break an Infinite Anvil'
+  no-perm-remove: '&cYou do not have permission to remove an Infinite Anvil.'
+  no-perm-set: '&cYou do not have permission to set an Infinite Anvil.'
+  no-perm-use: '&cYou do not have permission to use an Infinite Anvil.'
+  no-perm-cmd: '&cYou do not have permission to perform this command.'
