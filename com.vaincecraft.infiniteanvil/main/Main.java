@@ -8,6 +8,7 @@
 package com.vaincecraft.infiniteanvil.main;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -23,14 +24,12 @@ import com.vaincecraft.infiniteanvil.utils.GenerateUUID;
 import com.vaincecraft.infiniteanvil.messages.LanguageFile;
 import com.vaincecraft.infiniteanvil.messages.messages;
 
-import net.md_5.bungee.api.ChatColor;
-
 public class Main extends JavaPlugin {
 	public static Main plugin;
 	public Data data;
 	public GenerateUUID generateUUID;
 	public CommandHandler commandHandler;
-	public String pluginVersion = "V.1.2";
+	public String pluginVersion = "V.1.3";
 	
 	public void onEnable() {
 		plugin = this;
