@@ -7,14 +7,13 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.logging.Level;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-import net.md_5.bungee.api.ChatColor;
-
-public class VersionChecker implements Listener{
+public class VersionChecker implements Listener {
 	public String pluginVersion = Main.getInstance().getDescription().getVersion();
 	public VersionChecker() {
 		if (Main.getInstance().getConfig().getBoolean("settings.ConsoleCheckUpdate")) {
@@ -53,13 +52,13 @@ public class VersionChecker implements Listener{
 		Player p = j.getPlayer();
 		if(p.hasPermission("infiniteanvil.updates") && Main.getInstance().getConfig().getBoolean("settings.CheckUpdate")) {
 			try {
-		      HttpURLConnection connection = (HttpURLConnection)new URL("https://api.spigotmc.org/legacy/update.php?resource=69094").openConnection();
-		      connection.setDoOutput(true);
-		      connection.setRequestMethod("POST");
-		      String version = new BufferedReader(new InputStreamReader(connection.getInputStream())).readLine();
-		      if (!pluginVersion.equals(version)) {
-		    	  p.sendMessage(ChatColor.GRAY + "[InfiniteAnvil] " + ChatColor.RED + "You are not in the latest version, please update the plugin from our spigot page: https://www.spigotmc.org/resources/infinite-anvil-1-7-10-1-14-3.69094/");
-		      }
+				HttpURLConnection connection = (HttpURLConnection)new URL("https://api.spigotmc.org/legacy/update.php?resource=69094").openConnection();
+				connection.setDoOutput(true);
+				connection.setRequestMethod("POST");
+				String version = new BufferedReader(new InputStreamReader(connection.getInputStream())).readLine();
+				if (!pluginVersion.equals(version)) {
+					p.sendMessage(ChatColor.GRAY + "[InfiniteAnvil] " + ChatColor.RED + "You are not in the latest version, please update the plugin from our spigot page: https://www.spigotmc.org/resources/infinite-anvil-1-7-10-1-14-3.69094/");
+				}
 		    }
 		    catch (IOException e) {
 		    	e.printStackTrace();
