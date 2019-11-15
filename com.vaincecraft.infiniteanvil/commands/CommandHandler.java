@@ -19,6 +19,7 @@ import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -35,52 +36,54 @@ public class CommandHandler implements CommandExecutor{
 	private int total;
 	  
 	public boolean onCommand(final CommandSender sender, Command cmd, String label, String[] args) {
-		int maxradius = Main.getInstance().getConfig().getInt("settings.max-radius");
-		String prefixs = Main.getInstance().getConfig().getString("settings.Prefix");
+		FileConfiguration main = Main.getInstance().getConfig();
+		FileConfiguration lang = Main.getLangFile();
+		int maxradius = main.getInt("settings.max-radius");
+		String prefixs = main.getString("settings.Prefix");
 		String prefix = prefixs.replaceAll("&", "§");
-		String alreadyset = Main.getLangFile().getString("messages.already-set");
+		String alreadyset = lang.getString("messages.already-set");
 		String colormsg1 = alreadyset.replaceAll("&", "§");
-		String alreadyremoved = Main.getLangFile().getString("messages.already-removed");
+		String alreadyremoved = lang.getString("messages.already-removed");
 		String colormsg2 = alreadyremoved.replaceAll("&", "§");
-		String noneradiusset = Main.getLangFile().getString("messages.none-radius-set");
+		String noneradiusset = lang.getString("messages.none-radius-set");
 		String colormsg3= noneradiusset.replaceAll("&", "§");
-		String noneradiusremove = Main.getLangFile().getString("messages.none-radius-remove");
+		String noneradiusremove = lang.getString("messages.none-radius-remove");
 		String colormsg4 = noneradiusremove.replaceAll("&", "§");
-		String alreadyempty = Main.getLangFile().getString("messages.already-empty");
+		String alreadyempty = lang.getString("messages.already-empty");
 		String colormsg5 = alreadyempty.replaceAll("&", "§");
-		String toggleon = Main.getLangFile().getString("messages.toggle-on");
+		String toggleon = lang.getString("messages.toggle-on");
 		String colormsg6 = toggleon.replaceAll("&", "§");
-		String toggleoff = Main.getLangFile().getString("messages.toggle-off");
+		String toggleoff = lang.getString("messages.toggle-off");
 		String colormsg7 = toggleoff.replaceAll("&", "§");
-		String alreadytoggledon = Main.getLangFile().getString("messages.already-toggled-on");
+		String alreadytoggledon = lang.getString("messages.already-toggled-on");
 		String colormsg8 = alreadytoggledon.replaceAll("&", "§");
-		String alreadytoggledoff = Main.getLangFile().getString("messages.already-toggled-off");
+		String alreadytoggledoff = lang.getString("messages.already-toggled-off");
 		String colormsg9 = alreadytoggledoff.replaceAll("&", "§");
-		String reload = Main.getLangFile().getString("messages.reload");
+		String reload = lang.getString("messages.reload");
 		String colormsg10 = reload.replaceAll("&", "§");
-		String numberzero = Main.getLangFile().getString("messages.number-zero");
+		String numberzero = lang.getString("messages.number-zero");
 		String colormsg11 = numberzero.replaceAll("&", "§");
-		String numbernegative = Main.getLangFile().getString("messages.number-negative");
+		String numbernegative = lang.getString("messages.number-negative");
 		String colormsg12 = numbernegative.replaceAll("&", "§");
-		String invalidblock = Main.getLangFile().getString("messages.invalid-block");
+		String invalidblock = lang.getString("messages.invalid-block");
 		String colormsg13 = invalidblock.replaceAll("&", "§");
-		String nopermcmd = Main.getLangFile().getString("messages.no-perm-cmd");
+		String nopermcmd = lang.getString("messages.no-perm-cmd");
 		String colormsg14 = nopermcmd.replaceAll("&", "§");
-		String invalidsyntaxs= Main.getLangFile().getString("messages.invalid-syntax");
+		String invalidsyntaxs= lang.getString("messages.invalid-syntax");
 		String invalidsyntax = invalidsyntaxs.replaceAll("&", "§"); //colormsg15
-		String numberabovemax = Main.getLangFile().getString("messages.number-above-max");
+		String numberabovemax = lang.getString("messages.number-above-max");
 		String colormsg16 = numberabovemax.replace("%radius%", Integer.toString(maxradius));
-		String anvilsets = Main.getLangFile().getString("messages.anvil-set");
+		String anvilsets = lang.getString("messages.anvil-set");
 		String anvilset = anvilsets.replaceAll("&", "§"); //colormsg17
-		String anvilremoves = Main.getLangFile().getString("messages.anvil-remove");
+		String anvilremoves = lang.getString("messages.anvil-remove");
 		String anvilremove = anvilremoves.replaceAll("&", "§"); //colormsg18
-		String radiussets = Main.getLangFile().getString("messages.radius-set");
+		String radiussets = lang.getString("messages.radius-set");
 		String radiusset = radiussets.replaceAll("&", "§"); //colormsg19
-		String radiusremoves = Main.getLangFile().getString("messages.radius-remove");
+		String radiusremoves = lang.getString("messages.radius-remove");
 		String radiusremove = radiusremoves.replaceAll("&", "§"); //colormsg20
-		String datapurges = Main.getLangFile().getString("messages.data-purge");
+		String datapurges = lang.getString("messages.data-purge");
 		String datapurge = datapurges.replaceAll("&", "§"); //colormsg21
-		String invalidnumbers = Main.getLangFile().getString("messages.invalid-number");
+		String invalidnumbers = lang.getString("messages.invalid-number");
 		String invalidnumber = invalidnumbers.replaceAll("&", "§"); //colormsg22
 		Player p = (Player)sender;
 	    int length = args.length;
@@ -104,7 +107,7 @@ public class CommandHandler implements CommandExecutor{
 	    					p.getPlayer().sendMessage(prefix + colormsg12);
 	    					return true;
 	    				}
-	    				if (radius > Main.getInstance().getConfig().getInt("settings.max-radius")) {
+	    				if (radius > main.getInt("settings.max-radius")) {
 	    					p.getPlayer().sendMessage(prefix + colormsg16);;
 	    					return true;
 	    				}
@@ -188,7 +191,7 @@ public class CommandHandler implements CommandExecutor{
 	    					p.getPlayer().sendMessage(prefix + colormsg12);
 	    					return true;
 	    				}
-	    				if (radius > Main.getInstance().getConfig().getInt("settings.max-radius")) {
+	    				if (radius > main.getInt("settings.max-radius")) {
 	    					p.getPlayer().sendMessage(prefix + colormsg16);;
 	    					return true;
 	    				}
@@ -315,10 +318,11 @@ public class CommandHandler implements CommandExecutor{
 	    return true;
 	 }
 	 private void help(String label, CommandSender sender) {
+		 FileConfiguration lang = Main.getLangFile();
 		 String pluginVersion = Main.getInstance().getDescription().getVersion();
 		 List<?> help = new ArrayList<String>();
 		 help.clear();
-   	  	 help = Main.getLangFile().getList("messages.Help");
+   	  	 help = lang.getList("messages.Help");
    	  	 int size = help.size();
    	  	 int i = 0;
    	  	 while(i < size) { 
