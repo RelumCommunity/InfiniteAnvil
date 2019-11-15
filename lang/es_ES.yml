@@ -1,3 +1,6 @@
+customanvilsettings:
+  name: '&4Yunque'
+  lore: '&4Este es un yunque especial'
 messages:
   Help:
   - '&e ------ &6Ayuda Infinite Anvil &e------'
