@@ -1,3 +1,6 @@
+customanvilsettings:
+  name: '&4Incudine'
+  lore: '&4Questo è un incudine speciale'
 messages:
   Help:
   - '&e ------ &6Infinite Anvil Help &e------'
