@@ -55,7 +55,7 @@ public class Data {
 		return blockData;
 	}
 	public String getUUID() {
-		return this.UUID;
+		return UUID;
 	}
 	public void clearData() {
 		anvils = 0;
@@ -66,7 +66,7 @@ public class Data {
 		}
 	}
 	public int getAnvils() {
-    return this.anvils;
+    return anvils;
 	}
 	public void setup() {
 		data = new File(Main.getInstance().getDataFolder(), "data.yml");
