@@ -11,9 +11,30 @@ settings:
   CheckUpdate: true
   #If set to true, you will always recieve messages in console, that will inform you about version of the plugin
   ConsoleCheckUpdate: true
-  #If set to true, anvil crafting will be removed
+  #If set to true, default anvil crafting will be removed
   RemoveAnvilRecipe: false
+  #If set to true, custom anvil crafting will be added (to remove default crafting, just set RemoveAnvilRecipe to true)
+  CustomAnvilRecipe: false
   #Plugin Prefix
   Prefix: '&7[Infinite Anvil] '
   #Set your lang file
   Language: "en_US"
+  #If true, custom names will be enabled
+  Name: true
+  #If true, custom lores will be enabled
+  Lore: true
+recipe:
+  #To set AIR just write AIR (I don't want "" or '')
+  #Recipe Shape
+  # A | B | C
+  # D | E | F
+  # G | H | I
+  A: IRON_INGOT
+  B: IRON_INGOT
+  C: IRON_INGOT
+  D: AIR
+  E: IRON_BLOCK
+  F: AIR
+  G: IRON_BLOCK
+  H: IRON_BLOCK
+  I: IRON_BLOCK
