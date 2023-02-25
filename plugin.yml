@@ -1,11 +1,11 @@
 name: InfiniteAnvil
-version: 1.6
+version: 2.0
 description: Make your anvil unbreakable
 author: nato3623
-main: com.vaincecraft.infiniteanvil.main.Main
+main: com.relumcommunity.infiniteanvil.main.Main
 
 commands:
   anvil:
     aliases: [anvils, infiniteanvil, ianvil, ia]
     description: recieve a complete list of available commands
-    usage: /anvil
+    usage: /anvil help
