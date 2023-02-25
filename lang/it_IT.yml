@@ -1,6 +1,8 @@
 customanvilsettings:
   name: '&4Incudine'
   lore: '&4Questo è un incudine speciale'
+guiname:
+  anvil: "&2Incudine"
 messages:
   Help:
   - '&e ------ &6Infinite Anvil Help &e------'
