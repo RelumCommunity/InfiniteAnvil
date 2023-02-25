@@ -1,6 +1,8 @@
 customanvilsettings:
   name: '&4Anvil'
   lore: '&4This is a special anvil'
+guiname:
+  anvil: "&2Anvil"
 messages:
   Help:
   - '&e ------ &6Infinite Anvil Help &e------'
