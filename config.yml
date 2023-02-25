@@ -32,9 +32,9 @@ recipe:
   A: IRON_INGOT
   B: IRON_INGOT
   C: IRON_INGOT
-  D: AIR
+  D: null
   E: IRON_BLOCK
-  F: AIR
+  F: null
   G: IRON_BLOCK
   H: IRON_BLOCK
   I: IRON_BLOCK
