@@ -5,7 +5,7 @@
  * @author nato3623
  *
  */
-package com.vaincecraft.infiniteanvil.utils;
+package com.relumcommunity.infiniteanvil.utils;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,7 +16,7 @@ import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import com.vaincecraft.infiniteanvil.main.Main;
+import com.relumcommunity.infiniteanvil.main.Main;
 
 public class Data {
 	private FileConfiguration loadData;
@@ -66,7 +66,7 @@ public class Data {
 		}
 	}
 	public int getAnvils() {
-    return anvils;
+		return anvils;
 	}
 	public void setup() {
 		data = new File(Main.getInstance().getDataFolder(), "data.yml");
