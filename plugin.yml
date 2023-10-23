@@ -1,8 +1,9 @@
 name: InfiniteAnvil
-version: 2.0
+version: 2.1
 description: Make your anvil unbreakable
 author: nato3623
 main: com.relumcommunity.infiniteanvil.main.Main
+api-version: 1.13
 
 commands:
   anvil:
