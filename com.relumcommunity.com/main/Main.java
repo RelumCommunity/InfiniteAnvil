@@ -39,7 +39,7 @@ public class Main extends JavaPlugin {
 	public Data data;
 	public GenerateUUID generateUUID;
 	public CommandHandler commandHandler;
-	public String pluginVersion = "V.2.0";
+	public String pluginVersion = "V.2.1";
 	
 	public void onEnable() {
 		plugin = this;
@@ -107,14 +107,14 @@ public class Main extends JavaPlugin {
 	        if (getInstance().getConfig().getBoolean("settings.Lore")) {
 	            List<String> customlore = new ArrayList<String>();
 	            String anvilLore = getLangFile().getString("customanvilsettings.lore");
-	            String colormsg2 = anvilLore.replaceAll("&", "ง");
+	            String colormsg2 = anvilLore.replaceAll("&", "ยง");
 	            customlore.clear();
 	            customlore.add(colormsg2);
 	            itemMeta.setLore(customlore);
 	        }
 	        if (getInstance().getConfig().getBoolean("settings.Name")) {
 	            String anvilname = getLangFile().getString("customanvilsettings.name");
-	            String colormsg3 = anvilname.replaceAll("&", "ง");
+	            String colormsg3 = anvilname.replaceAll("&", "ยง");
 	            itemMeta.setDisplayName(colormsg3);
 	        }
 	        anvil.setItemMeta(itemMeta);
